@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>Online Examination System Documentation</title>
+    
+    <!-- Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="loading">
+    <!-- Reading Progress - moved to top of the DOM for better performance -->
+    <div class="reading-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="layout-wrapper">
+        <!-- Enhanced Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.svg" alt="Logo" class="logo">
+                <h3>Online Exam System</h3>
+                <button id="sidebarToggle" class="d-md-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Dynamic TOC Navigation - will be populated from content -->
+            <div class="toc-container">
+                <nav id="toc" class="nav-toc"></nav>
+            </div>
+            
+            <!-- Version Badge -->
+            <div class="version-badge">
+                <span>v1.0</span>
+            </div>
+        </nav>
+
+        <main id="main">
+            <!-- Enhanced Header - Make more responsive -->
+            <header class="doc-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">ITI</a></li>
+                                    <li class="breadcrumb-item"><a href="#">PWD Track</a></li>
+                                    <li class="breadcrumb-item active">Adv. DB Project</li>
+                                </ol>
+                            </nav>
+                            <h1 class="display-4">Online Examination System</h1>
+                            <div class="header-content">
+                                <!-- Project Info -->
+                                <div class="project-info">
+                                    <p class="lead">Advanced Database Documentation</p>
+                                    <div class="badges mb-3">
+                                        <span class="badge bg-primary">ITI</span>
+                                        <span class="badge bg-secondary">PWD Track</span>
+                                        <span class="badge bg-info">Intake 45</span>
+                                    </div>
+                                    
+                                    <!-- Project Team Information in Header - More responsive -->
+                                    <div class="project-team mt-4">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="team-container">
+                                                    <h6 class="team-label"><i class="fas fa-users me-2"></i> Team Members</h6>
+                                                    <ul class="header-team-list">
+                                                        <li>Mohamed Sameh Ahmed</li>
+                                                        <li>Nada Mostafa Amine</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="supervisor-container">
+                                                    <h6 class="team-label"><i class="fas fa-user-tie me-2"></i> Supervised By</h6>
+                                                    <p class="supervisor-name">Eng. Marwa</p>
+                                                    <p class="supervisor-title">Advanced Database Course</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Search Container -->
+            <div class="container mt-4">
+                <div class="search-container">
+                    <input type="text" class="form-control search-input" placeholder="Search documentation...">
+                    <div class="search-results"></div>
+                </div>
+            </div>
+
+            <!-- Content Structure - Improved responsive layout -->
+            <div class="content-wrapper">
+                <div class="container">
+                    <div class="row g-4">
+                        <!-- Main Content - Now wider -->
+                        <div class="col-lg-12">
+                            <article id="content" class="documentation-content" data-source="documentation.md">
+                                <!-- Content will be loaded from documentation.md -->
+                                <section id="overview">
+                                    <h2>Project Overview</h2>
+                                    <p>This is a temporary placeholder for the content. The actual content will be loaded from documentation.md.</p>
+                                </section>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Contact</h5>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-map-marker-alt"></i> ITI Assiut Branch</li>
+                                <li><i class="fas fa-envelope"></i> contact@iti.gov.eg</li>
+                                <li><i class="fas fa-phone"></i> +20 xxx xxx xxxx</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <!-- Removed repository link -->
+                                <li><a href="#"><i class="fas fa-book"></i> API Documentation</a></li>
+                                <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>About Project</h5>
+                            <p>Version 1.0 | March 2025</p>
+                            <p>© 2025 ITI. All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p class="mb-0">© 2025 ITI. All Rights Reserved.</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <div class="social-links">
+                                    <!-- Removed GitHub link -->
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Update marked.js to a specific version with proper loading -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.0/tocbot.min.js"></script>
+    <!-- Load our script last to ensure dependencies are loaded first -->
+    <script src="script.js"></script>
+</body>
+</html>

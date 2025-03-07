@@ -1,0 +1,1523 @@
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #0f172a;
+    --accent-color: #10b981;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --sidebar-width: 280px;
+    --transition-speed: 0.3s;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --text-color: #334155;
+    --bg-color: #f8fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+    position: relative; /* Needed to make overflow-x: hidden work properly */
+}
+
+/* Improved scrolling behavior */
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+    width: 100%; /* Ensure full width */
+    max-width: 100vw; /* Prevent overflow */
+    overscroll-behavior-y: contain; /* Improve mobile scroll behavior */
+    overflow-x: hidden !important;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior-x: none;
+    -ms-overflow-style: none; /* for Internet Explorer and Edge */
+    scrollbar-width: none; /* for Firefox */
+}
+
+/* Hide horizontal scrollbar completely */
+::-webkit-scrollbar-horizontal {
+    display: none;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--secondary-color);
+    color: white;
+    position: fixed;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    flex-shrink: 0;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.nav-container {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.nav-links {
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::before {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Sidebar TOC Styles */
+.sidebar .toc-wrapper {
+    flex: 1;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 40vh;
+    font-size: 0.9rem;
+}
+
+.sidebar .toc-wrapper .card-header {
+    padding: 0.5rem 1rem;
+}
+
+.sidebar .toc-wrapper .card-body {
+    padding: 0.75rem;
+    max-height: calc(40vh - 40px);
+}
+
+.sidebar #toc a {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+}
+
+.sidebar #toc a:hover,
+.sidebar #toc a.is-active-link {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--accent-color);
+}
+
+.sidebar #toc ul {
+    margin-bottom: 0;
+}
+
+.version-badge {
+    flex-shrink: 0;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+/* Main Content Styles */
+main {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    min-height: 100vh;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+header {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    padding: 3rem 2rem;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 2rem;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 2rem 0 1rem;
+    color: var(--secondary-color);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Code Blocks */
+pre {
+    background: var(--dark-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    position: relative;
+    max-width: 100%;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Cards */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* Project Information Styles */
+.project-info {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.7) 0%, rgba(16, 185, 129, 0.7) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 1.75rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-info h2 {
+    color: white;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-info dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.project-info dt {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.project-info dd {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* Team Member Cards */
+.team-members {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.team-member-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.member:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.member img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Footer Styles */
+.footer {
+    background: var(--dark-color);
+    color: white;
+    padding: 4rem 0;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Search Functionality Styles */
+.search-container {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background: var(--background-color);
+}
+
+/* Modern Header Styles */
+.main-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 6rem 0;
+    margin-bottom: 3rem;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.header-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform var(--transition-speed);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background: linear-gradient(135deg, white, #f8fafc);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.feature-card:hover::before {
+    opacity: 0.1;
+}
+
+/* Info Cards */
+.info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Documentation Content */
+.documentation-content {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    box-shadow: var(--shadow-md);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.documentation-content h2 {
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    margin-top: 3rem;
+    scroll-margin-top: 100px;
+}
+
+.documentation-content h3 {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+}
+
+.documentation-content pre {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    position: relative;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.documentation-content pre::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.1);
+    border-radius: 0 8px 0 8px;
+}
+
+.documentation-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Animations */
+[data-aos] {
+    opacity: 0;
+    transition-property: transform, opacity;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Enhanced Search */
+.search-wrapper {
+    position: relative;
+    margin: 1rem 0;
+}
+
+.search-wrapper .input-group {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.search-wrapper .input-group-text {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.search-wrapper .form-control {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.search-wrapper .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Top Navigation Bar */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: var(--sidebar-width);
+    height: 60px;
+    background: white;
+    padding: 0 1.5rem;
+    box-shadow: var(--shadow-sm);
+    z-index: 999;
+}
+
+/* Sticky Sidebar Content */
+.sticky-sidebar {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+/* Table of Contents */
+.toc-wrapper {
+    background: white;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.toc-wrapper .card-body {
+    padding: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+        padding: 1rem 0.5rem;
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+        width: 280px;
+    }
+
+    .sidebar h2,
+    .logo img {
+        display: none;
+    }
+
+    .sidebar-header h3 {
+        display: none;
+    }
+
+    .sidebar.active .sidebar-header h3 {
+        display: block;
+    }
+
+    .nav-links a span {
+        display: none;
+    }
+
+    .sidebar.active .nav-links a span {
+        display: inline;
+    }
+
+    .sidebar .toc-wrapper {
+        display: none;
+    }
+    
+    .sidebar.active .toc-wrapper {
+        display: block;
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    #main {
+        margin-left: 0;
+    }
+
+    .main-header {
+        padding: 4rem 0;
+    }
+
+    .header-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+
+    .top-navbar {
+        left: 70px;
+    }
+
+    .sticky-sidebar {
+        position: static;
+        margin-top: 2rem;
+    }
+
+    .quick-card {
+        margin-bottom: 1rem;
+    }
+
+    .doc-header {
+        padding: 2rem 1rem;
+    }
+
+    .project-info {
+        padding: 1.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .documentation-content {
+        padding: 1.5rem;
+    }
+
+    .documentation-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .documentation-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .col-lg-8, 
+    .col-lg-4 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .right-sidebar {
+        margin-top: 1.5rem;
+    }
+
+    .team-container, 
+    .supervisor-container {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    main, #main {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .col-lg-8 {
+        width: 60%;
+        max-width: 60%;
+        flex: 0 0 60%;
+    }
+
+    .col-lg-4 {
+        width: 40%;
+        max-width: 40%;
+        flex: 0 0 40%;
+    }
+
+    .sidebar .toc-wrapper {
+        max-height: 30vh;
+    }
+    
+    .sidebar .toc-wrapper .card-body {
+        max-height: calc(30vh - 40px);
+    }
+}
+
+/* Small Desktop */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* Toggle sidebar functionality */
+.sidebar-active {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+}
+
+/* Show back to top button when scrolled */
+.back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fixed container overflow issues */
+.content-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix TOC container */
+.toc-wrapper {
+    max-width: 100%;
+}
+
+/* Fix code block overflow */
+pre code {
+    white-space: pre-wrap;
+}
+
+/* Fix long links */
+a {
+    word-break: break-word;
+}
+
+/* Improved layout for very small devices */
+@media (max-width: 400px) {
+    .doc-header {
+        padding: 1.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    .project-info {
+        padding: 1rem;
+    }
+
+    .project-team {
+        padding: 0.75rem;
+    }
+
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+/* Make card footers responsive */
+.card-footer {
+    flex-wrap: wrap;
+}
+
+/* Fix table overflow on small screens */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Only scroll horizontally if needed */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    scrollbar-width: thin; /* Thinner scrollbar for Firefox */
+    max-width: 100%;
+}
+
+/* Make images responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Right Sidebar Enhancements */
+.right-sidebar {
+    position: sticky;
+    top: 1rem;
+    width: 100%;
+}
+
+.team-list li {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    background-color: rgba(37, 99, 235, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.team-list li:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    transform: translateX(5px);
+}
+
+.team-list li i {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.supervisor-info {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    background-color: rgba(37, 99, 235, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.supervisor-info:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    transform: translateX(5px);
+    transition: all 0.2s;
+}
+
+.supervisor-info i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Ensure main content and sidebar fill the full width */
+.documentation-content {
+    width: 100%;
+}
+
+/* Table of Contents improvements */
+.toc-wrapper {
+    background: white;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.toc-wrapper .card-body {
+    padding: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .content-wrapper .row {
+        flex-direction: column;
+    }
+    
+    .col-lg-8, .col-lg-4 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+    
+    .right-sidebar {
+        margin-top: 2rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .col-lg-8 {
+        width: 65%;
+        max-width: 65%;
+        flex: 0 0 65%;
+    }
+    
+    .col-lg-4 {
+        width: 35%;
+        max-width: 35%;
+        flex: 0 0 35%;
+    }
+}
+
+.right-sidebar {
+    position: sticky;
+    top: 1rem;
+}
+
+.team-list li {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.team-list li:hover {
+    background-color: rgba(0,0,0,0.05);
+    transform: translateX(5px);
+}
+
+.supervisor-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.supervisor-info i {
+    font-size: 2rem;
+}
+
+.toc-wrapper {
+    background: white;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+}
+
+.toc-wrapper .card-body {
+    padding: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#toc ul ul {
+    padding-left: 1rem;
+}
+
+#toc a {
+    display: block;
+    padding: 0.3rem 0;
+    color: var(--text-color);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    margin: 0.2rem 0;
+    transition: all 0.2s;
+}
+
+#toc a:hover, 
+#toc a.is-active-link {
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    background-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Project Team in Header */
+.project-team {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.25rem;
+    border-left: 4px solid var(--accent-color);
+    margin-top: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-label {
+    color: #10b981; /* Bright accent color for better visibility */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.header-team-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+}
+
+.header-team-list li {
+    padding: 0.25rem 0;
+    font-weight: 500;
+}
+
+.supervisor-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.supervisor-title {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
+.team-container, .supervisor-container {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-container:hover, .supervisor-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments for project team in header */
+@media (max-width: 768px) {
+    .project-team .row {
+        flex-direction: column;
+    }
+    
+    .project-team .col-md-6:first-child {
+        margin-bottom: 1rem;
+    }
+    
+    .team-container, .supervisor-container {
+        height: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .right-sidebar {
+        margin-top: 2rem;
+    }
+}
+
+/* Fix horizontal overflow issues */
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Fix table scrolling behavior */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Only scroll horizontally if needed */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    scrollbar-width: thin; /* Thinner scrollbar for Firefox */
+}
+
+/* Fix code block scrolling behavior */
+pre {
+    max-width: 100%;
+    overflow-x: auto; /* Horizontal scroll only when needed */
+}
+
+/* Improve documentation content */
+.documentation-content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    width: auto;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ensure TOC stays within bounds */
+.toc-wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#toc {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+/* Fix mobile nav layout */
+@media (max-width: 767px) {
+    .sidebar {
+        max-width: 240px;
+    }
+}
+
+/* Fix for Firefox */
+* {
+    scrollbar-color: var(--primary-color) transparent;
+    scrollbar-width: thin;
+}
+
+/* Show an indicator for horizontally scrollable elements */
+.table-responsive::after,
+pre::after {
+    content: "⇄ Shift+scroll to view";
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 0.7rem;
+    color: rgba(100, 100, 100, 0.7);
+    background-color: rgba(250, 250, 250, 0.8);
+    padding: 2px 5px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.table-responsive:hover::after,
+pre:hover::after {
+    opacity: 1;
+}
+
+/* Enhanced Reading Progress Bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px; /* Increased height for better visibility */
+    background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+    z-index: 2000; /* Above everything */
+    transition: width 0.15s ease-out; /* Smoother transition */
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.7); /* Glow effect */
+}
+
+/* Improved Mobile/Tablet Responsiveness */
+@media screen and (max-width: 1024px) {
+    /* Adjust sidebar for tablets */
+    .sidebar {
+        width: 220px;
+    }
+    
+    main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+    
+    /* Adjust main content padding */
+    .container {
+        padding: 1.5rem;
+    }
+    
+    /* More compact heading sizes */
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Mobile View Enhancements */
+@media screen and (max-width: 767px) {
+    /* Simplified header */
+    .doc-header {
+        padding: 2rem 1rem 3rem;
+    }
+    
+    /* Adjust team containers */
+    .team-container, .supervisor-container {
+        padding: 0.75rem;
+    }
+    
+    /* Better touch targets for mobile */
+    .nav-links a {
+        padding: 0.8rem;
+        margin: 0.4rem 0;
+    }
+    
+    /* Ensure readable font sizes */
+    body {
+        font-size: 16px; /* Minimum readable size */
+    }
+    
+    .documentation-content {
+        padding: 1.25rem;
+    }
+    
+    /* Optimize back to top button for mobile */
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Improve mobile search */
+    .search-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 0.75rem;
+    }
+    
+    /* Fix mobile footer */
+    .footer {
+        padding: 2rem 0;
+    }
+}
+
+/* Responsive Typography for Better Readability */
+@media (max-width: 576px) {
+    body {
+        font-size: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Enhanced Header Styling */
+.doc-header {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 40%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 2rem;
+    margin: -2rem -2rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Add subtle pattern overlay to header */
+.doc-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.8;
+}
+
+/* Adjust text colors for better contrast */
+.doc-header h1 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* Better breadcrumb visibility */
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.breadcrumb-item.active {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Enhanced Sidebar TOC as Main Navigation */
+.toc-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin: 1rem 0;
+}
+
+.nav-toc {
+    width: 100%;
+}
+
+.nav-toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.nav-toc ul ul {
+    padding-left: 1.2rem;
+}
+
+.nav-toc a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    margin: 0.2rem 0;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+}
+
+.nav-toc a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.nav-toc a.is-active-link {
+    background-color: rgba(16, 185, 129, 0.2);
+    border-left-color: var(--accent-color);
+    color: white;
+}
+
+/* First level headings */
+.nav-toc > ul > li > a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Second level headings */
+.nav-toc > ul > li > ul > li > a {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Third level headings */
+.nav-toc > ul > li > ul > li > ul > li > a {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Media queries for responsive TOC */
+@media (max-width: 767px) {
+    .sidebar.active .toc-container {
+        display: block;
+        margin-top: 1.5rem;
+    }
+    
+    .toc-container {
+        display: none;
+    }
+}
