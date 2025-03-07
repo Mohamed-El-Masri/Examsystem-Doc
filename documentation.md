@@ -1,6 +1,6 @@
 ## System Overview
 
-The Online Examination System facilitates the entire examination lifecycle, from user management to automated grading and result analysis. Key stakeholders include:
+The Examination System facilitates the entire examination lifecycle, from user management to automated grading and result analysis. Key stakeholders include:
 
 - **Students:** Access exams, submit answers, and view results
 - **Instructors:** Create question banks, generate exams, and review student performance
