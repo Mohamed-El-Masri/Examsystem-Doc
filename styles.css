@@ -54,11 +54,11 @@ html, body {
 .sidebar {
     display: flex;
     flex-direction: column;
-    width: var(--sidebar-width);
+    width: var(--sidebar-width) !important;
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    background: var(--secondary-color);
+    background: var(--secondary-color) !important;
     color: white;
     position: fixed;
     padding: 2rem;
@@ -308,7 +308,7 @@ th {
 /* Project Information Styles */
 .project-info {
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.7) 0%, rgba(16, 185, 129, 0.7) 100%);
-    backdrop-filter: blur(10px);
+   
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     padding: 1.75rem;
@@ -366,7 +366,7 @@ th {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.5rem 1rem;
     border-radius: 30px;
-    backdrop-filter: blur(4px);
+  
     transition: all 0.3s ease;
 }
 
@@ -418,137 +418,37 @@ th {
 .search-container {
     position: relative;
     margin: 2rem 0;
-    transition: all 0.3s ease;
 }
 
-/* Enhanced search input */
 .search-input {
     width: 100%;
-    padding: 1rem 1rem 1rem 3rem; /* Space for icon */
-    border: 2px solid rgba(37, 99, 235, 0.3);
-    border-radius: 10px;
+    padding: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
     font-size: 1rem;
-    background-color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Input focus state */
-.search-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
-    transform: translateY(-2px);
-}
-
-/* Search icon */
-.search-container::before {
-    content: '\f002';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-/* Icon on focus */
-.search-container:focus-within::before {
-    opacity: 1;
-    color: var(--primary-color);
-}
-
-/* Results dropdown */
 .search-results {
     position: absolute;
-    top: calc(100% + 10px);
+    top: 100%;
     left: 0;
     right: 0;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 1000;
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: auto;
-    transform-origin: top center;
-    transform: translateY(10px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* Show results when active */
-.search-results.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* Result items */
 .search-item {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
-    transition: background 0.2s ease;
-    display: flex;
-    align-items: center;
-}
-
-.search-item:last-child {
-    border-bottom: none;
 }
 
 .search-item:hover {
-    background: rgba(37, 99, 235, 0.05);
-}
-
-/* Add icon to search items */
-.search-item::before {
-    content: '\f07b';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    margin-right: 0.75rem;
-    color: var(--primary-color);
-    opacity: 0.7;
-}
-
-/* "No results" state */
-.search-item.no-results {
-    color: #64748b;
-    font-style: italic;
-    pointer-events: none;
-}
-
-.search-item.no-results::before {
-    content: '\f06a';
-    color: #94a3b8;
-}
-
-/* Highlighted text in results */
-.search-highlight {
-    background-color: rgba(16, 185, 129, 0.2);
-    font-weight: 500;
-    padding: 0.1rem 0.2rem;
-    border-radius: 3px;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .search-input {
-        padding: 0.9rem 0.9rem 0.9rem 2.8rem;
-        font-size: 0.95rem;
-    }
-    
-    .search-container::before {
-        left: 0.9rem;
-        font-size: 1rem;
-    }
+    background: var(--background-color);
 }
 
 /* Modern Header Styles */
@@ -573,7 +473,7 @@ th {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    backdrop-filter: blur(4px);
+   
 }
 
 /* Feature Cards */
@@ -1247,7 +1147,7 @@ img {
     padding: 1.25rem;
     border-left: 4px solid var(--accent-color);
     margin-top: 1rem;
-    backdrop-filter: blur(10px);
+   
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 

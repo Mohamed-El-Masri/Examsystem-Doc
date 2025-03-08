@@ -21,7 +21,7 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin: 40px 0 20px 0;
         }
         .diagram-container {
             margin: 20px 0;
@@ -31,6 +31,48 @@
             max-width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Mobile menu button for header */
+        .mobile-menu-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn i {
+            color: #2563eb;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn.active i.fa-bars {
+            display: none;
+        }
+        
+        .mobile-menu-btn:not(.active) i.fa-xmark {
+            display: none;
+        }
+        
+        .mobile-menu-btn:hover {
+            background-color: #f1f5f9;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -43,6 +85,21 @@
         <div class="spinner"></div>
     </div>
 
+    <!-- Mobile Menu Button (visible only on mobile) -->
+    <div class="mobile-menu-btn d-md-none" id="mobileSidebarToggle">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-xmark"></i>
+    </div>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Lightbox for Images -->
+    <div class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged Image">
+    </div>
+
     <!-- Main Layout -->
     <div class="layout-wrapper">
         <!-- Enhanced Sidebar -->
@@ -51,7 +108,12 @@
                 <img src="logo.svg" alt="Logo" class="logo">
                 <h3>Exam System</h3>
                 <button id="sidebarToggle" class="d-md-none">
-                    <i class="fas fa-bars"></i>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </button>
             </div>
             
@@ -98,7 +160,7 @@
                                                     <h6 class="team-label"><i class="fas fa-users me-2"></i> Team Members</h6>
                                                     <ul class="header-team-list">
                                                         <li>Mohamed Sameh Ahmed</li>
-                                                        <li>Nada Mostafa Amine</li>
+                                                        <li>Nada Mostafa Amen</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -123,14 +185,19 @@
                 <div class="download-container">
                     <h4 class="mb-3"><i class="fas fa-download me-2"></i> Download Resources</h4>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <a href="OnlineExam_Complete.sql" download class="btn btn-primary w-100">
-                                <i class="fas fa-file-code me-2"></i> Download SQL Queries (OnlineExam_Complete.sql)
+                                <i class="fas fa-file-code me-2"></i> SQL Queries
                             </a>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <a href="online.bak" download class="btn btn-success w-100">
-                                <i class="fas fa-database me-2"></i> Download Database Backup (online.bak)
+                                <i class="fas fa-database me-2"></i> Database Backup
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="StoredProcedures_QuickReference.md" download class="btn btn-info w-100">
+                                <i class="fas fa-book me-2"></i> SP Quick Reference
                             </a>
                         </div>
                     </div>
@@ -172,7 +239,7 @@
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-map-marker-alt"></i> ITI Assiut Branch</li>
                                 <li><i class="fas fa-envelope"></i> contact@iti.gov.eg</li>
-                                <li><i class="fas fa-phone"></i> +20 xxx xxx xxxx</li>
+                                <li><i class="fas fa-phone"></i> +20 106 494 2025</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
@@ -180,7 +247,7 @@
                             <ul class="list-unstyled">
                                 <li><a href="OnlineExam_Complete.sql" download><i class="fas fa-download"></i> Download SQL Script</a></li>
                                 <li><a href="online.bak" download><i class="fas fa-database"></i> Download Database Backup</a></li>
-                                <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
+                                <li><a href="StoredProcedures_QuickReference.md" download><i class="fas fa-book"></i> Stored Procedures Reference</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4">
@@ -222,5 +289,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.0/tocbot.min.js"></script>
     <!-- Load our script last to ensure dependencies are loaded first -->
     <script src="script.js"></script>
+    
+    <script>
+        // Additional script for mobile menu button
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            const sidebarOverlay = document.querySelector('.sidebar-overlay');
+            
+            if (mobileSidebarToggle) {
+                mobileSidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    main.classList.toggle('sidebar-active');
+                    sidebarOverlay.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

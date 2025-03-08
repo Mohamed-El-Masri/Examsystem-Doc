@@ -27,17 +27,26 @@ function initializeAll() {
     
     // Add new responsive enhancements
     enhanceResponsiveness();
+    
+    // Initialize image lightbox
+    initializeImageLightbox();
 }
 
 function initializeSidebar() {
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const main = document.getElementById('main');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
 
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('active');
             main.classList.toggle('sidebar-active');
+            
+            // Toggle the overlay
+            if (sidebarOverlay) {
+                sidebarOverlay.classList.toggle('active');
+            }
             
             // When sidebar is shown in mobile, also show the TOC
             if (sidebar.classList.contains('active') && window.innerWidth < 768) {
@@ -49,17 +58,28 @@ function initializeSidebar() {
             }
         });
     }
-
-    // Close sidebar when clicking outside
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth < 768) {
-            if (!sidebar?.contains(e.target) && 
-                !sidebarToggle?.contains(e.target) && 
-                sidebar?.classList.contains('active')) {
+    
+    // Close sidebar when clicking on overlay
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            main.classList.remove('sidebar-active');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
+    
+    // Close sidebar when clicking on a link in mobile view
+    const sidebarLinks = sidebar.querySelectorAll('a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768 && sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
                 main.classList.remove('sidebar-active');
+                if (sidebarOverlay) {
+                    sidebarOverlay.classList.remove('active');
+                }
             }
-        }
+        });
     });
 
     // Improve smooth scroll functionality
@@ -139,29 +159,6 @@ function initializeSearch() {
             searchResults.innerHTML = '';
         }
     }, 300));
-
-    // Show results when typing
-    searchInput.addEventListener('input', function() {
-        if (this.value.length >= 2) {
-            searchResults.classList.add('active');
-        } else {
-            searchResults.classList.remove('active');
-        }
-    });
-    
-    // Hide results when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.classList.remove('active');
-        }
-    });
-    
-    // Highlight matching text in results
-    function highlightMatches(text, query) {
-        if (!query) return text;
-        const regex = new RegExp(`(${query})`, 'gi');
-        return text.replace(regex, '<span class="search-highlight">$1</span>');
-    }
 }
 
 function performSearch(searchText, resultsContainer) {
@@ -264,6 +261,12 @@ function initializeContent() {
                 enhanceCodeBlocks();
                 enhanceHeadingScrolling();
                 
+                // Enhance images after content is loaded
+                enhanceDiagramImages();
+                
+                // Dispatch contentLoaded event
+                document.dispatchEvent(new Event('contentLoaded'));
+                
                 // Handle hash in URL for direct section loading
                 if (window.location.hash) {
                     setTimeout(() => {
@@ -271,18 +274,17 @@ function initializeContent() {
                         if (targetElement) {
                             const offset = 80;
                             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
-                            
                             window.scrollTo({
                                 top: targetPosition,
                                 behavior: 'smooth'
                             });
                         }
-                    }, 300); // Give a small delay for content to render fully
+                    }, 300);
                 }
             })
             .catch(error => {
-                console.error('Error loading documentation:', error);
-                contentElement.innerHTML = '<p>Error loading content. Please try again later.</p>';
+                console.error('Error loading content:', error);
+                contentElement.innerHTML = `<p class="text-danger">Error loading content: ${error.message}</p>`;
             });
     } else {
         // For pre-loaded content
@@ -949,4 +951,95 @@ function adjustLayout() {
     } else {
         document.documentElement.style.setProperty('--content-padding', '2rem');
     }
+}
+
+// Add this new function to initialize the image lightbox
+function initializeImageLightbox() {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    
+    // Function to enhance diagram containers after content is loaded
+    function enhanceDiagramContainers() {
+        const diagrams = document.querySelectorAll('.diagram-container');
+        
+        diagrams.forEach(diagram => {
+            // Add caption if not already present
+            if (!diagram.querySelector('.diagram-caption')) {
+                const img = diagram.querySelector('img');
+                if (img && img.alt) {
+                    const caption = document.createElement('div');
+                    caption.className = 'diagram-caption';
+                    caption.textContent = img.alt;
+                    diagram.appendChild(caption);
+                }
+            }
+            
+            // Add click event to open lightbox
+            diagram.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                }
+            });
+        });
+    }
+    
+    // Close lightbox when clicking the close button
+    lightboxClose.addEventListener('click', function() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    });
+    
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+    
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+    
+    // Call enhanceDiagramContainers after content is loaded
+    document.addEventListener('contentLoaded', enhanceDiagramContainers);
+    
+    // Also call it after a short delay to ensure it runs even if the event is missed
+    setTimeout(enhanceDiagramContainers, 1000);
+}
+
+// Add this function to enhance diagram images
+function enhanceDiagramImages() {
+    // Find all images in the content
+    const images = document.querySelectorAll('.documentation-content img');
+    
+    images.forEach(img => {
+        // Skip if already in a diagram container
+        if (img.closest('.diagram-container')) return;
+        
+        // Create diagram container
+        const container = document.createElement('div');
+        container.className = 'diagram-container';
+        
+        // Replace the image with the container
+        img.parentNode.insertBefore(container, img);
+        container.appendChild(img);
+        
+        // Add caption if image has alt text
+        if (img.alt) {
+            const caption = document.createElement('div');
+            caption.className = 'diagram-caption';
+            caption.textContent = img.alt;
+            container.appendChild(caption);
+        }
+    });
 }
