@@ -1,0 +1,11 @@
+This is a placeholder file for the database backup.
+
+In a real implementation, this would be a binary .bak file that contains a complete backup of the Online Exam System database.
+
+The actual file would be several megabytes in size and would contain:
+- Database schema (tables, views, stored procedures)
+- All data stored in the database
+- Database configuration settings
+
+For demonstration purposes, this placeholder indicates where the real .bak file would be placed.
+Users would download this file and restore it in SQL Server Management Studio to create a complete copy of the database. 

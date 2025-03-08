@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=5.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#2563eb">
     <title>Examination System Documentation</title>
     
@@ -11,8 +11,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="custom.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .download-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .diagram-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .diagram-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body class="loading">
     <!-- Reading Progress - moved to top of the DOM for better performance -->
@@ -98,6 +118,25 @@
                 </div>
             </header>
 
+            <!-- Download Buttons -->
+            <div class="container mt-4">
+                <div class="download-container">
+                    <h4 class="mb-3"><i class="fas fa-download me-2"></i> Download Resources</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <a href="OnlineExam_Complete.sql" download class="btn btn-primary w-100">
+                                <i class="fas fa-file-code me-2"></i> Download SQL Queries (OnlineExam_Complete.sql)
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <a href="online.bak" download class="btn btn-success w-100">
+                                <i class="fas fa-database me-2"></i> Download Database Backup (online.bak)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Search Container -->
             <div class="container mt-4">
                 <div class="search-container">
@@ -139,8 +178,8 @@
                         <div class="col-md-4">
                             <h5>Quick Links</h5>
                             <ul class="list-unstyled">
-                                <!-- Removed repository link -->
-                                <li><a href="#"><i class="fas fa-book"></i> API Documentation</a></li>
+                                <li><a href="OnlineExam_Complete.sql" download><i class="fas fa-download"></i> Download SQL Script</a></li>
+                                <li><a href="online.bak" download><i class="fas fa-database"></i> Download Database Backup</a></li>
                                 <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
                             </ul>
                         </div>
@@ -159,7 +198,6 @@
                             </div>
                             <div class="col-md-6 text-end">
                                 <div class="social-links">
-                                    <!-- Removed GitHub link -->
                                     <a href="#"><i class="fab fa-linkedin"></i></a>
                                     <a href="#"><i class="fas fa-envelope"></i></a>
                                 </div>

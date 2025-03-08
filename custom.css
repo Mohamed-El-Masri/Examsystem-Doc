@@ -1,0 +1,185 @@
+/* Custom styles for the Online Exam System documentation */
+
+/* Download container styling */
+.download-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.download-container:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.download-container h4 {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+/* Diagram container styling */
+.diagram-container {
+    margin: 20px 0;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.diagram-container:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.diagram-container img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+/* Table styling */
+.documentation-content table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.documentation-content th {
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+}
+
+.documentation-content td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.documentation-content tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.documentation-content tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Code block styling */
+.documentation-content pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.documentation-content code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Inline code styling */
+.documentation-content p code,
+.documentation-content li code {
+    background-color: #f1f5f9;
+    color: #2563eb;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Section styling */
+.documentation-content section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.documentation-content section:last-child {
+    border-bottom: none;
+}
+
+/* Heading styling */
+.documentation-content h2 {
+    color: #1e40af;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2563eb;
+}
+
+.documentation-content h3 {
+    color: #2563eb;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* List styling */
+.documentation-content ul,
+.documentation-content ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.documentation-content li {
+    margin-bottom: 8px;
+}
+
+/* Link styling */
+.documentation-content a {
+    color: #2563eb;
+    text-decoration: none;
+    border-bottom: 1px dotted #2563eb;
+    transition: all 0.2s ease;
+}
+
+.documentation-content a:hover {
+    color: #1e40af;
+    border-bottom: 1px solid #1e40af;
+}
+
+/* Download link styling */
+.documentation-content a[download] {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    margin: 5px 0;
+    transition: all 0.2s ease;
+}
+
+.documentation-content a[download]:hover {
+    background-color: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .documentation-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .documentation-content h3 {
+        font-size: 1.25rem;
+    }
+    
+    .documentation-content pre {
+        padding: 10px;
+    }
+    
+    .download-container {
+        padding: 15px;
+    }
+} 
