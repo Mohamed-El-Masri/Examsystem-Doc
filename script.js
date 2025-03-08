@@ -139,6 +139,29 @@ function initializeSearch() {
             searchResults.innerHTML = '';
         }
     }, 300));
+
+    // Show results when typing
+    searchInput.addEventListener('input', function() {
+        if (this.value.length >= 2) {
+            searchResults.classList.add('active');
+        } else {
+            searchResults.classList.remove('active');
+        }
+    });
+    
+    // Hide results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.remove('active');
+        }
+    });
+    
+    // Highlight matching text in results
+    function highlightMatches(text, query) {
+        if (!query) return text;
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<span class="search-highlight">$1</span>');
+    }
 }
 
 function performSearch(searchText, resultsContainer) {
